@@ -1,0 +1,9 @@
+{
+  "bot_token": "YOUR_BOT_TOKEN_GOES_HERE",
+  "server_address": "your-server-address.com:25565",
+  "server_start_script": "C:\\path\\to\\your\\start.bat",
+  "rcon_host": "127.0.0.1",
+  "rcon_port": 25575,
+  "rcon_password": "YOUR_SECRET_RCON_PASSWORD",
+  "inactivity_limit_minutes": 30
+}
