@@ -161,9 +161,8 @@ async def stop(ctx):
             print(f"Failed to stop server: {rcon_error}")
             await ctx.send("❌ **Error:** Could not connect via RCON to stop the server.")
     else:
-        await ctx.send("❌ **The server is OFFLINE!**")
-        server_started = False
-        is_starting = False
+        await ctx.send("❌ **The server is running but cannot be connected to. Is the `playit.gg` tunnel running?**")
+        return
 
 # Bot Tasks
 @tasks.loop(minutes=5)
