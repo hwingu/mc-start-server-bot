@@ -205,4 +205,4 @@ async def check_inactivity():
             is_starting = False
             empty_since = None
 
-bot.run(os.getenv('BOT_TOKEN'))
+bot.run(config.get("bot_token"))
