@@ -112,7 +112,7 @@ async def start(ctx):
         await ctx.send("Server is offline. Attempting to start...")
 
         subprocess.Popen([SERVER_START_SCRIPT], creationflags=CREATE_NEW_CONSOLE)
-        await ctx.send("**Server is starting!**\n")
+        await ctx.send(f"**Server is starting!**\nServer is set to shutdown automatically after **{INACTIVITY_LIMIT_MINUTES} minutes** of inactivity.\n")
         
         for i in range(20):
             print(f"Checking server status... Attempt {i+1}/20")
@@ -125,6 +125,10 @@ async def start(ctx):
                 is_starting = False
                 print("server started", server_started)
                 return
+            
+        else:
+            await ctx.send(f"❌ **Error:** Server failed to start after 3+ minutes. {user_mention}, please check the server console.")
+            is_starting = False
 
     except Exception as start_error:
         print(f"Failed to start server: {start_error}")
@@ -136,26 +140,30 @@ async def stop(ctx):
     global server_started
     global is_starting
 
-    if server_started:
-        status = await check_server_status()
+    if not server_started:
+        await ctx.send("❌ **The server is OFFLINE!**")
+        return
 
+    status = await check_server_status()
+
+    if status:
         if status.players.online > 0:
             await ctx.send("⚠️ **There are players online! Please ask them to log off before stopping the server.**")
             return
         
         try:
             await asyncio.to_thread(run_rcon_command, "stop")
-            
+            await ctx.send("🛑 **Server is stopping!**")
             server_started = False
             is_starting = False
 
-            await ctx.send("🛑 **Server is stopping!**")
         except Exception as rcon_error:
             print(f"Failed to stop server: {rcon_error}")
             await ctx.send("❌ **Error:** Could not connect via RCON to stop the server.")
-
     else:
         await ctx.send("❌ **The server is OFFLINE!**")
+        server_started = False
+        is_starting = False
 
 # Bot Tasks
 @tasks.loop(minutes=5)
