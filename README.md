@@ -19,4 +19,7 @@
 ### Server Status and Online Players List
 <img width="987" height="141" alt="image" src="https://github.com/user-attachments/assets/141097ee-f864-45b5-9055-bda8eb867f50" />
 
+## ToDos
 
+- [ ] Run bot on raspberry pi, start server with WoL
+- [ ] Usage readme section
