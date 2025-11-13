@@ -18,7 +18,9 @@ except FileNotFoundError:
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix='$', intents=intents)
+intents.members = False
+intents.presences = False
+bot = commands.Bot(command_prefix='$', intents=intents, max_messages=None)
 
 # Configuration
 SERVER_START_SCRIPT = config.get("server_start_script")
