@@ -2,3 +2,4 @@ config.json
 .env
 bot-env/
 start_bot.bat
+venv/
