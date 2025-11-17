@@ -4,7 +4,6 @@ from mcstatus import JavaServer
 from discord.ext import tasks, commands
 import asyncio
 from mcrcon import MCRcon
-from subprocess import CREATE_NEW_CONSOLE
 import json
 
 try:
